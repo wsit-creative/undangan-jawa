@@ -446,6 +446,19 @@ function addWish(name,message,time){
  item.querySelector('.wish-name').textContent=name;item.querySelector('.wish-time').textContent=time;item.querySelector('p').textContent=message;
  list.prepend(item);
 }
+
+const musicBtn = document.getElementById('musicBtn');
+const bgMusic = document.getElementById('bgMusic');
+
+musicBtn.onclick = () => {
+  if (bgMusic.paused) {
+    bgMusic.play();
+    musicBtn.textContent = '❚❚';
+  } else {
+    bgMusic.pause();
+    musicBtn.textContent = '♫';
+  }
+};
 </script>
 </body>
 </html>
