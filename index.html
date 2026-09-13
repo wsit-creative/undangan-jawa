@@ -383,15 +383,31 @@ footer{padding:18px;text-align:center;background:#160b08;color:#b99b70;font-size
 <footer>WSIT OFFICIAL · 08226548875</footer>
 
 <script>
-const opening=document.getElementById('opening');
-const openBtn=document.getElementById('openBtn');
-const nav=document.getElementById('nav');
-const navLinks=document.getElementById('navLinks');
-const hamb=document.getElementById('hamb');
+const opening = document.getElementById('opening');
+const openBtn = document.getElementById('openBtn');
+const nav = document.getElementById('nav');
+const navLinks = document.getElementById('navLinks');
+const hamb = document.getElementById('hamb');
 
-openBtn.addEventListener('click',()=>{
+const musicBtn = document.getElementById('musicBtn');
+const bgMusic = document.getElementById('bgMusic');
+
+openBtn.addEventListener('click', async () => {
   opening.classList.add('open');
-  setTimeout(()=>{opening.classList.add('hide');document.body.classList.remove('locked');nav.classList.add('visible');},950);
+
+  try {
+    await bgMusic.play();
+    musicBtn.textContent = '❚❚';
+    musicBtn.classList.add('playing');
+  } catch (err) {
+    console.log('Musik belum bisa diputar:', err);
+  }
+
+  setTimeout(() => {
+    opening.classList.add('hide');
+    document.body.classList.remove('locked');
+    nav.classList.add('visible');
+  }, 950);
 });
 hamb.addEventListener('click',()=>navLinks.classList.toggle('open'));
 document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>navLinks.classList.remove('open')));
@@ -447,8 +463,7 @@ function addWish(name,message,time){
  list.prepend(item);
 }
 
-const musicBtn = document.getElementById('musicBtn');
-const bgMusic = document.getElementById('bgMusic');
+
 
 musicBtn.onclick = () => {
   if (bgMusic.paused) {
